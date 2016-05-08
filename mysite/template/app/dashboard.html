@@ -1,5 +1,27 @@
 {% extends "app/base.html" %}
 
+{% block usuario %}
+ <h2>Archivos</h2>
+ <nav class="navbar" style="background: initial;border-radius: 0;margin-bottom: 0px;">
+     <div>
+         <ul class="nav navbar-nav">
+             <li class="">
+                 <a href="#page-top">Perfil</a>
+             </li>
+             <li class="">
+                 <a href="#portfolio">Consultar</a>
+             </li>
+             <li class="">
+                 <a href="#about">Notificación</a>
+             </li>
+             <li class="">
+                 <a href="{% url 'contador' %}">Repositorio</a>
+             </li>
+         </ul>
+     </div>
+<nav>
+{% endblock %}
+      
 {% block mystyle %}
 {% load staticfiles %}
 <link href="{% static 'css/main.css' %}" rel="stylesheet" type="text/css">
@@ -8,10 +30,8 @@
 {% block content %}
 <div class="wrapper-dashboard">
     <div class="row">
-        <div class="col-xs-6 col-md-4 side-menu">
+        <div class="col-xs-6 col-md-4 side-menu" style="display:none;">
             <button class="btn btn-default side-menu-btn">Consultar</button>
-            <br>
-            <button class="btn btn-default side-menu-btn btn-sync" style="display:none;">Sync</button>
         </div>
         <div class="col-xs-12 col-sm-6 col-md-8" style="">
             <div>
@@ -37,6 +57,7 @@
                 </div>
                 <div class="col-xs-6 side-menu2" style="display:none;">
                     <div style="margin-top:25px;">
+                        <button class="btn btn-default side-menu-btn btn-sync" style="display:none;background: #695F58;margin-left: 24px;">Sync</button>
                         <table class="table table-hover first" style="display:none;">
                             <tbody>
                                 <tr>
