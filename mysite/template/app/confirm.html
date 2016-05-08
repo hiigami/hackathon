@@ -1,0 +1,9 @@
+{% extends "app/base.html" %}
+
+{% block content %}
+    {% if status == 'paid' %}
+    Confirmacion de pago exitoso!!!!
+    {% else %}
+    Occurrio un fallo en su pago!!!!
+    {% endif %}
+{% endblock %}

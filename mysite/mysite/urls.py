@@ -24,8 +24,9 @@ urlpatterns = [
     url(r'^$', Home.as_view()),
     url(r'^contratar', Contratar.as_view()),
     url(r'^dashboard/contador', Dashboard.as_view()),
-    url(r'^dashboard/me', DashboardUser.as_view())
+    url(r'^dashboard/me', DashboardUser.as_view()),
     url(r'^registro', Registro.as_view()),
     url(r'^presupuesto', Presupuesto.as_view()),
     url(r'^bienvenida', Bienvenida.as_view()),
+    url(r'^payment', Pago.as_view())
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
