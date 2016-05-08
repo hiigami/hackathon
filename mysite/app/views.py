@@ -4,6 +4,9 @@ from django.views.generic import View
 
 from moneyed import *
 
+import conekta
+conekta.api_key = "key_cd8sXbx5XGwPyY3K77iqYw"
+
 globar_harcodeado = {
     "accountant" : {
         "price": Money(amount="120.00", currency='MXN'),
@@ -22,9 +25,6 @@ class Contratar(View):
     template_name = 'app/contratarContador.html'
 
     def get(self, request, *args, **kwargs):
-        return render(request, self.template_name)
-    
-    def post(self, request, *args, **kwargs):
         return render(request, self.template_name)
 
 factura = """
@@ -56,9 +56,73 @@ class Presupuesto(View):
 
     def get(self, request, *args, **kwargs):
         return render(request, self.template_name)
+
 class Bienvenida(View):
     template_name = 'app/bienvenida.html'
 
     def get(self, request, *args, **kwargs):
         return render(request, self.template_name)
 
+class Pago(View):
+    template_name = 'app/payment.html'
+
+    def get(self, request, *args, **kwargs):
+        return render(request, self.template_name)
+        
+    def post(self, request, *args, **kwargs):
+        charge = conekta.Charge.create({
+        "description":"Stogies",
+        "amount": 20000,
+        "currency":"MXN",
+        "reference_id":"9839-wolf_pack",
+        "card": request.POST["conektaTokenId"],
+        "details": {
+            "name": request.POST["cardname"],
+            "phone": "403-342-0642",
+            "email": "logan@x-men.org",
+            "customer": {
+            "logged_in": True,
+            "successful_purchases": 14,
+            "created_at": 1379784950,
+            "updated_at": 1379784950,
+            "offline_payments": 4,
+            "score": 9
+            },
+            "line_items": [{
+            "name": "Contador",
+            "description": "Servicios de contaduria",
+            "unit_price": 20000,
+            "quantity": 1,
+            "sku": "cont_s1",
+            "category": "services"
+            }],
+            "billing_address": {
+            "street1": request.POST["address1"],
+            "street2": request.POST["address2"],
+            "street3": "",
+            "city": request.POST["city"],
+            "state":request.POST["state"],
+            "zip": request.POST["zip"],
+            "country": request.POST["country"],
+            "tax_id": "xmn671212drx",
+            "company_name":"X-Men Inc.",
+            "phone": "77-777-7777",
+            "email": "purshasing@x-men.org"
+            },
+            "shipment": {
+            "carrier":"estafeta",
+            "service":"international",
+            "price": 20,
+            "address": {
+                "street1": request.POST["address1"],
+                "street2": request.POST["address2"],
+                "street3": "",
+                "city":request.POST["city"],
+                "state":request.POST["state"],
+                "zip":request.POST["zip"],
+                "country":request.POST["country"]
+            }
+            }
+        }});
+
+        return render(request, 'app/confirm.html', {"status": charge.status})
