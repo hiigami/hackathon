@@ -3,102 +3,171 @@
 {% block content %}
 <div  class="container" id="registroDiv">
 	<ul class="nav nav-tabs">
-	  <li role="presentation" class="active"><a href="">Contador</a></li>
-	  <li role="presentation"><a href="#">Empresa</a></li>
+	  <li role="presentation" class="active"><a href="#rgistroContadorDiv" data-toggle="tab">Contador</a></li>
+	  <li role="presentation"><a href="#registroEmpresaDiv" data-toggle="tab">Empresa</a></li>
 	</ul>
-	
-	<div id="rgistroContadores">
-		<h2>Registro de Contadores</h2>
-	<form>
-		<div class="row" style="float:right">
-			<div  class="col-xs-3 col-md-4 col-sm-3  input-group input-group-lg" >
-				<div class="file-preview">
-    				<img id="profileImg" src="" height="100" width="100" class="img-circle" style="display:none;">
-    			</div>
-    		</div>	
-    		<div class="col-xs-3 col-md-4 col-sm-3  input-group input-group-lg">	
-				<label class="control-label">imagen de Perfil</label>
-    			<input id="profileImgTxt"  name="profilePicture" multiple type="file" class="file file-loading" data-allowed-file-extensions='["jpg", "png","jepg"]' style="float:right">
-    		</div>
-		</div>
-		<br>
-		<br>
-		<div class="row"></div>
-		<div class="row">
-    		<div class="col-xs-3 col-md-3 col-sm-3" >
-				Nombre 
+	<button style="display:none" id="registroContador" onclick="showRegistroContador();"></button>
+	<button style="display:none" id="registroEmpresa" onclick="showRegistroEmpresa();"></button>
+	<div class="tab-content">
+		<div id="rgistroContadorDiv" class="tab-pane active">
+			<h2>Registro de Contadores</h2>
+		<form class="frm">
+			<div class="row" style="float:right">
+				<div  class="col-xs-3 col-md-4 col-sm-3  input-group input-group-lg" >
+					<div class="file-preview">
+	    				<img id="profileImg" src="" height="100" width="100" class="img-circle" style="display:none;">
+	    			</div>
+	    		</div>	
+	    		<div class="col-xs-3 col-md-4 col-sm-3  input-group input-group-lg">	
+					<label class="control-label">imagen de Perfil</label>
+	    			<input id="profileImgTxt"  name="profilePicture" multiple type="file" class="file file-loading profileImgTxt" data-allowed-file-extensions='["jpg", "png","jepg"]' style="float:right">
+	    		</div>
 			</div>
+			<br>
+			<br>
+			<div class="row"></div>
+			<div class="row">
+	    		<div class="col-xs-3 col-md-3 col-sm-3" >
+					Nombre 
+				</div>
 
-			<div class="col-xs-3 col-md-3 col-sm-3">	
-				<input name type="text" id="nombreTxt">
+				<div class="col-xs-3 col-md-3 col-sm-3">	
+					<input name type="text" id="nombreTxt">
+				</div>
 			</div>
-		</div>
-		<br>
-		<div class="row">	
-				<div class="col-xs-3 col-md-3 col-sm-3" >
-				Paterno
-			</div>
+			<br>
+			<div class="row">	
+					<div class="col-xs-3 col-md-3 col-sm-3" >
+					Paterno
+				</div>
 
-			<div class="col-xs-3 col-md-3 col-sm-3">	
-				<input type="text" id="paternoTxt">
+				<div class="col-xs-3 col-md-3 col-sm-3">	
+					<input type="text" id="paternoTxt">
+				</div>
 			</div>
-		</div>
-		<br>
-		<div class="row">	
-				<div class="col-xs-3 col-md-3 col-sm-3" >
-				Materno
-			</div>
+			<br>
+			<div class="row">	
+					<div class="col-xs-3 col-md-3 col-sm-3" >
+					Materno
+				</div>
 
-			<div class="col-xs-3 col-md-3 col-sm-3">	
-				<input type="text" id="razonSocialTxt">
+				<div class="col-xs-3 col-md-3 col-sm-3">	
+					<input type="text" id="razonSocialTxt">
+				</div>	
+			</div>
+			<br>	
+			<div class="row">
+				<div class="col-xs-4 col-md-3 col-sm-6">
+					RFC
+				</div>
+				<div class="col-xs-4 col-md-3 col-sm-6">
+					<input type="text" id="rfcTxt" maxlength=13>
+				</div>
+			</div>
+			<br>
+			<div  id="nEmpleadosdiv"  class="row"  style="display:none">
+				<div class="col-xs-4 col-md-3 col-sm-6" >
+					N&uacute;mero de empleados 
+				</div>
+				<div class="col-xs-4 col-md-3 col-sm-6">	
+					<input type="number" id="nempleadosTxt">
+				</div>
+			</div>
+			<br>
+			<div class="row" >
+				<div class="col-xs-4 col-md-3 col-sm-6" >
+					Curriculum Vitae
+				</div>
+				<div class="col-xs-4 col-md-3 col-sm-6">	
+					<input type="file" id="cvfile">
+				</div>
+			</div>
+			<br>
+			<div class="row">
+				<div class="col-xs-4 col-md-3 col-sm-6">
+				</div>
+				<div class="col-xs-4 col-md-3 col-sm-6" >
+					<button id="registroBtn" type="button"  onclick="registrar();"class="btn btn-primary">Registrar</button>
+				</div>			
 			</div>	
+			<br>	
+		</form>
 		</div>
-		<br>	
-		<div class="row">
-			<div class="col-xs-4 col-md-3 col-sm-6">
-				RFC
+		<div id="registroEmpresaDiv" class="tab-pane">
+				<h2>Registro de Empresas</h2>
+		<form class="frm">
+			<div class="row" style="float:right">
+				<div  class="col-xs-3 col-md-4 col-sm-3  input-group input-group-lg" >
+					<div class="file-preview">
+	    				<img id="profileImg" src="" height="100" width="100" class="img-circle" style="display:none;">
+	    			</div>
+	    		</div>	
+	    		<div class="col-xs-3 col-md-4 col-sm-3  input-group input-group-lg">	
+					<label class="control-label">imagen de Perfil</label>
+	    			<input id="profileImgTxt"  name="profilePicture" multiple type="file" class="file file-loading profileImgTxt" data-allowed-file-extensions='["jpg", "png","jepg"]' style="float:right">
+	    		</div>
 			</div>
-			<div class="col-xs-4 col-md-3 col-sm-6">
-				<input type="text" id="rfcTxt" maxlength=13>
+			<br>
+			<br>
+			<div class="row"></div>
+			<div class="row">
+	    		<div class="col-xs-3 col-md-3 col-sm-3" >
+					Razon social
+				</div>
+
+				<div class="col-xs-3 col-md-3 col-sm-3">	
+					<input name type="text" id="nombreTxt">
+				</div>
 			</div>
-		</div>
-		<br>
-		<div  id="nEmpleadosdiv"  class="row"  style="display:none">
-			<div class="col-xs-4 col-md-3 col-sm-6" >
-				N&uacute;mero de empleados 
+			<br>	
+			<div class="row">
+				<div class="col-xs-4 col-md-3 col-sm-6">
+					RFC
+				</div>
+				<div class="col-xs-4 col-md-3 col-sm-6">
+					<input type="text" id="rfcTxt" maxlength=13>
+				</div>
 			</div>
-			<div class="col-xs-4 col-md-3 col-sm-6">	
-				<input type="number" id="nempleadosTxt">
+			<br>
+			<div  id="nEmpleadosdiv"  class="row">
+				<div class="col-xs-4 col-md-3 col-sm-6" >
+					N&uacute;mero de empleados 
+				</div>
+				<div class="col-xs-4 col-md-3 col-sm-6">	
+					<input type="number" id="nempleadosTxt">
+				</div>
 			</div>
-		</div>
-		<br>
-		<div class="row" >
-			<div class="col-xs-4 col-md-3 col-sm-6" >
-				Curriculum Vitae
+			<br>
+			<div class="row" >
+				<div class="col-xs-4 col-md-3 col-sm-6" >
+					carta de presentacï&oacute;n
+				</div>
+				<div class="col-xs-4 col-md-3 col-sm-6">	
+					<input type="file" id="cvfile">
+				</div>
 			</div>
-			<div class="col-xs-4 col-md-3 col-sm-6">	
-				<input type="file" id="cvfile">
-			</div>
-		</div>
-		<br>
-		<div class="row">
-			<div class="col-xs-4 col-md-3 col-sm-6">
-			</div>
-			<div class="col-xs-4 col-md-3 col-sm-6" >
-				<button id="registroBtn" type="button" class="btn btn-primary">Registrar</button>
-			</div>			
+			<br>
+			<div class="row">
+				<div class="col-xs-4 col-md-3 col-sm-6">
+				</div>
+				<div class="col-xs-4 col-md-3 col-sm-6" >
+					<button id="registroBtn" type="button" onclick="registrar();" class="btn btn-primary">Registrar</button>
+				</div>			
+			</div>	
+			<br>	
+		</form>
+
 		</div>	
-		<br>	
-	</form>
-	</div>
-
+	</div>	
 <div>
-
+<div id="successmsg" class="alert alert-success" style="display:none">
+  <strong>En un lapso de 24 h se te enviará un correo para confirma</strong> 
+</div>
 {% endblock %}
 {% block myscript %}
 	<script>
 	$(document).ready(function() {
-	    $("#profileImgTxt").on("change", function(){
+	    $(".profileImgTxt").on("change", function(){
 	    	readURL(this);
 	    });
 	});
@@ -114,6 +183,25 @@
 
         reader.readAsDataURL(input.files[0]);
     }
+}
+
+function showRegistroContador(){
+	$("#registroEmpresaDiv").hide();
+	$("#registroContadorDiv").show();
+}
+
+function showRegistroEmpresa(){
+	$("#registroContadorDiv").hide();
+	$("#registroEmpresaDiv").show();
+
+}
+function registrar(){
+	$(".frm input").val("");
+	$("#successmsg").show();
+	setTimeout(function(){
+		$("#successmsg").hide();
+	}, 3000);
+		
 }
 </script>
    {% endblock %}
