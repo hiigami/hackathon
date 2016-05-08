@@ -1,0 +1,67 @@
+{% extends "app/base.html" %}
+
+{% block content %}
+
+<div class="container">
+	<div>
+		<h2>Contratar Contador</h2>	
+	</div>
+	<br>
+	<div class="row">
+		<div class="col-xs-4 col-md-4 col-sm-4" >
+			N&uacute;mero de facturas
+		</div>
+
+		<div class="col-xs-4 col-md-4 col-sm-4" >
+			M&iacute;nimo 
+		</div>
+
+		<div class="col-xs-4 col-md-4 col-sm-4" >
+			M&aacute;ximo	
+		</div>
+	</div>
+	<br>
+	<div class="row">
+
+		<div class="col-xs-4 col-md-4 col-sm-4" >
+			Por Ventas
+		</div>
+
+		<div class="col-xs-4 col-md-4 col-sm-4" >
+			<input id="fVentasMinTxt"  type="number" > 
+		</div>
+
+		<div class="col-xs-4 col-md-4 col-sm-4" >
+			<input id="fVentasMaxTxt"  type="number" >
+		</div>	
+
+	</div>
+	<br>
+	<div class="row">
+
+		<div class="col-xs-4 col-md-4 col-sm-4" >
+			Por Compras
+		</div>
+
+		<div class="col-xs-4 col-md-4 col-sm-4" >
+			<input id="fComprasMinTxt"  type="number" > 
+		</div>
+
+		<div class="col-xs-4 col-md-4 col-sm-4" >
+			<input id="fComprasMaxTxt"  type="number" >
+		</div>	
+
+	</div>
+	<br>
+	<div class="row">
+		<div class="col-xs-6 col-md-6 col-sm-6" >
+			<button  id="contratarBtn" type="button" class="btn btn-primary">Contratar</button>
+		</div>
+		<div class="col-xs-6 col-md-6 col-sm-6" >
+			<button id="presupuestoBtn"type="button" class="btn btn-primary">Presupuesto</button>
+		</div>	
+	</div>
+	<br>	
+</div>	
+
+{% endblock %}
