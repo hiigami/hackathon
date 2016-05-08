@@ -1,1 +1,7 @@
 Django==1.9.6
+django-money==0.8
+ecdsa==0.13
+Fabric==1.11.1
+paramiko==1.17.0
+py-moneyed==0.6.0
+pycrypto==2.6.1

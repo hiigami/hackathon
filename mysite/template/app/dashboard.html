@@ -1,0 +1,181 @@
+{% extends "app/base.html" %}
+
+{% block mystyle %}
+{% load staticfiles %}
+<link href="{% static 'css/main.css' %}" rel="stylesheet" type="text/css">
+{% endblock %}
+
+{% block content %}
+<div class="wrapper-dashboard">
+    <div class="row">
+        <div class="col-xs-6 col-md-4 side-menu">
+            <button class="btn btn-default side-menu-btn">Consultar</button>
+            <br>
+            <button class="btn btn-default side-menu-btn btn-sync" style="display:none;">Sync</button>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-8" style="">
+            <div>
+                <div class="col-xs-6" style="height:500px;">
+                    <div style="text-align: left;margin-top:25px;padding-left:25px;">
+                        <a class="link-add-file" href="#" data-id="first">
+                            <i class="fa fa-folder fa-2x file-color" aria-hidden="true" style="vertical-align: middle;padding-right:20px;"></i>
+                            Juan Perez
+                        </a>
+                        <br>
+                        <br>
+                        <a class="link-add-file" href="#" data-id="second">
+                            <i class="fa fa-folder fa-2x file-color" aria-hidden="true" style="vertical-align: middle;padding-right:20px;"></i>
+                            Karerina Gutierrez
+                        </a>
+                        <br>
+                        <br>
+                        <a class="link-add-file" href="#" data-id="third">
+                            <i class="fa fa-folder fa-2x file-color" aria-hidden="true" style="vertical-align: middle;padding-right:20px;"></i>
+                            Natalia Paloma
+                        </a>
+                    </div>
+                </div>
+                <div class="col-xs-6 side-menu2" style="display:none;">
+                    <div style="margin-top:25px;">
+                        <table class="table table-hover first" style="display:none;">
+                            <tbody>
+                                <tr>
+                                    <td>$ 32,435.00 MNX</td>
+                                    <td>2016-05-05</td>
+                                    <td>
+                                        <i class="fa fa-download" aria-hidden="true"></i>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <thead>
+                                <tr>
+                                    <th>Monto</th>
+                                    <th>Fecha</th>
+                                    <th>Documento</th>
+                                </tr>
+                            </thead>
+                        </table>
+                        <table class="table table-hover second" style="display:none;">
+                            <tbody>
+                                <tr>
+                                    <td>$ 2,035.00 MNX</td>
+                                    <td>2013-02-12</td>
+                                    <td>
+                                        <i class="fa fa-download" aria-hidden="true"></i>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>$ 138.40 MNX</td>
+                                    <td>2013-03-12</td>
+                                    <td>
+                                        <i class="fa fa-download" aria-hidden="true"></i>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <thead>
+                                <tr>
+                                    <th>Monto</th>
+                                    <th>Fecha</th>
+                                    <th>Documento</th>
+                                </tr>
+                            </thead>
+                        </table>
+                        <table class="table table-hover third" style="display:none;">
+                            <tbody>
+                                <tr>
+                                    <td>$ 40,275.00 MNX</td>
+                                    <td>2016-02-12</td>
+                                    <td>
+                                        <i class="fa fa-download" aria-hidden="true"></i>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>$ 50,275.00 MNX</td>
+                                    <td>2016-02-13</td>
+                                    <td>
+                                        <i class="fa fa-download" aria-hidden="true"></i>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>$ 1,205.00 MNX</td>
+                                    <td>2016-02-14</td>
+                                    <td>
+                                        <i class="fa fa-download" aria-hidden="true"></i>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <thead>
+                                <tr>
+                                    <th>Monto</th>
+                                    <th>Fecha</th>
+                                    <th>Documento</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block myscript %}
+<script>
+    var _class_tmp = "";
+    function getRandomIntInclusive(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+    function randomR() {
+        console.log("---");
+        var _tmp = getRandomIntInclusive(1, 99999999);
+        var _tmpString = "";
+        var _tmpArr = _tmp.toString().split('');
+        _tmpArr = _tmpArr.reverse();
+        for (var i = _tmpArr.length - 1; i >= 0; i--) {
+           _tmpString += _tmpArr[i];
+           if (i%3==0) {
+               _tmpString += ","
+           }
+        }
+        var d = new Date();
+        _tmpString = _tmpString.slice(0,-1);
+        $('table.'+_class_tmp).append("<tr><td>$ " +
+          _tmpString +
+          " MNX</td><td>" +
+          d.getFullYear() +
+          "-" + d.getMonth() +
+          "-" +
+          d.getDate() +
+          "</td><td>" +
+          "<i class='fa fa-download' aria-hidden='true'></i>" +
+          "</td></tr>");
+    }
+    $('.btn-sync').on('click', function(e){ 
+        e.preventDefault();
+        var $btn = $(this);
+        var btnHtml = $btn.html();
+        $btn.html('<i class="fa fa-circle-o-notch fa-spin fa-fw margin-bottom"></i>');
+        setTimeout(function(){
+          var _limit = getRandomIntInclusive(2, 7);
+          for(var j = _limit; j >= 0; j--) {
+            randomR();
+          }
+          $btn.html(btnHtml);
+        }, 2000);
+    });
+    $('.link-add-file').on('click', function(e) {
+        e.preventDefault();
+        $('.btn-sync').show();
+        var $el = $(this).siblings().find('.fa-folder-open');
+        $el.removeClass('fa-folder-open');
+        $el.addClass('fa-folder');
+        _class_tmp = $(this).attr('data-id');
+        $(this).find("i").removeClass('fa-folder');
+        $(this).find("i").addClass('fa-folder-open');
+        $('.side-menu2').show();
+        $('.side-menu2 table').hide();
+        $('.side-menu2 table.' + $(this).attr('data-id')).show();
+    });
+</script>
+{% endblock %}

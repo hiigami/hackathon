@@ -22,5 +22,7 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     url(r'^$', Home.as_view()),
-    url(r'^contratar', Contratar.as_view())
+    url(r'^contratar', Contratar.as_view()),
+    url(r'^dashboard/contador', Dashboard.as_view()),
+    url(r'^dashboard/me', DashboardUser.as_view())
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
