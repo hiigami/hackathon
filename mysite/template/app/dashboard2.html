@@ -1,0 +1,114 @@
+{% extends "app/base.html" %}
+
+{% block mystyle %}
+{% load staticfiles %}
+<link href="{% static 'css/main.css' %}" rel="stylesheet" type="text/css">
+{% endblock %}
+
+{% block content %}
+<div class="wrapper-dashboard">
+    <div class="row">
+        <div class="col-xs-6 col-md-4 side-menu">
+            <button class="btn btn-default side-menu-btn">Consultar</button>
+            <br>
+            <button class="btn btn-default side-menu-btn btn-sync">Sync</button>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-8" style="">
+            <div style="margin-top:25px;">
+                <div style="text-align: left;">
+                    <form action="/file-upload"
+                        class="dropzone"
+                        id="mydz">
+                    </form>
+                </div>
+                <table class="table table-hover">
+                    <tbody>
+                        <tr>
+                            <td>$ 32,435.00 MNX</td>
+                            <td>2016-05-05</td>
+                            <td>factura-1217-8745-7099.xml</td>
+                            <td>
+                                <span role="button" class="btn-del-file">
+                                    <i class="fa fa-times" aria-hidden="true"></i>
+                                </span>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <thead>
+                        <tr>
+                            <th>Monto</th>
+                            <th>Fecha</th>
+                            <th>Documento</th>
+                            <th>Eliminar</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block myscript %}
+{% load staticfiles %}
+<script src="{% static 'js/dropzone.js' %}" ></script>
+<script>
+Dropzone.options.mydz = {
+    dictDefaultMessage: "Agregar archivo(s)",
+    addedfile: function(file) {
+        var d = new Date();
+        $('.table').append("<tr><td>$ 12.00 MNX</td><td>" + d.getDate() + "-" + d.getMonth() + "-" + d.getFullYear() + "</td><td>" + file.name + "</td></tr>");
+    }
+};
+$('body').on('click', '.btn-del-file', function() {
+   $(this).parent().parent().remove(); 
+});
+
+    function getRandomIntInclusive(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+    function randomR() {
+        console.log("---");
+        var _tmp = getRandomIntInclusive(1, 99999999);
+        var _tmpString = "";
+        var _tmpArr = _tmp.toString().split('');
+        _tmpArr = _tmpArr.reverse();
+        for (var i = _tmpArr.length - 1; i >= 0; i--) {
+           _tmpString += _tmpArr[i];
+           if (i%3==0) {
+               _tmpString += ","
+           }
+        }
+        var d = new Date();
+        var _file_name = "factura-" + getRandomIntInclusive(1, 9999) +
+          "-" + getRandomIntInclusive(1, 9999) + "-" +
+          getRandomIntInclusive(1, 9999) + ".xml";
+        _tmpString = _tmpString.slice(0,-1);
+        $('table').append("<tr><td>$ " +
+          _tmpString +
+          " MNX</td><td>" +
+          d.getFullYear() +
+          "-" + d.getMonth() +
+          "-" +
+          d.getDate() +
+          "</td><td>" +
+          _file_name +
+          "</td><td>" +
+          "<span role='button' class='btn-del-file'><i class='fa fa-times' aria-hidden='true'></i></span>" +
+          "</td></tr>");
+    }
+    $('.btn-sync').on('click', function(e){ 
+        e.preventDefault();
+        var $btn = $(this);
+        var btnHtml = $btn.html();
+        $btn.html('<i class="fa fa-circle-o-notch fa-spin fa-fw margin-bottom"></i>');
+        setTimeout(function(){
+          var _limit = getRandomIntInclusive(2, 7);
+          for(var j = _limit; j >= 0; j--) {
+            randomR();
+          }
+          $btn.html(btnHtml);
+        }, 2000);
+    });
+</script>
+{% endblock %}
