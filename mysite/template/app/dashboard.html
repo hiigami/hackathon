@@ -207,7 +207,8 @@
         var _data = $('.factura-ejemplo').html();
         _data = _data.replace("{name}", _name);
         for(var i = rows.length - 2; i >= 0; i-- ) {
-            _data = _data.replace(relation[i], $(rows[i]).html().replace("$", "").replace("MNX", ""));
+            _data = _data.replace(relation[i], $(rows[i]).html().replace("$", "").replace("MNX", "").replace(/\s+/g, ""));
+            $(rows[i]).css("text-decoration", "line-through");
         }
         createAndDownloadFile(_data, "");
     });
