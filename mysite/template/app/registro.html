@@ -1,0 +1,119 @@
+{% extends "app/base.html" %}
+
+{% block content %}
+<div  class="container" id="registroDiv">
+	<ul class="nav nav-tabs">
+	  <li role="presentation" class="active"><a href="">Contador</a></li>
+	  <li role="presentation"><a href="#">Empresa</a></li>
+	</ul>
+	
+	<div id="rgistroContadores">
+		<h2>Registro de Contadores</h2>
+	<form>
+		<div class="row" style="float:right">
+			<div  class="col-xs-3 col-md-4 col-sm-3  input-group input-group-lg" >
+				<div class="file-preview">
+    				<img id="profileImg" src="" height="100" width="100" class="img-circle" style="display:none;">
+    			</div>
+    		</div>	
+    		<div class="col-xs-3 col-md-4 col-sm-3  input-group input-group-lg">	
+				<label class="control-label">imagen de Perfil</label>
+    			<input id="profileImgTxt"  name="profilePicture" multiple type="file" class="file file-loading" data-allowed-file-extensions='["jpg", "png","jepg"]' style="float:right">
+    		</div>
+		</div>
+		<br>
+		<br>
+		<div class="row"></div>
+		<div class="row">
+    		<div class="col-xs-3 col-md-3 col-sm-3" >
+				Nombre 
+			</div>
+
+			<div class="col-xs-3 col-md-3 col-sm-3">	
+				<input name type="text" id="nombreTxt">
+			</div>
+		</div>
+		<br>
+		<div class="row">	
+				<div class="col-xs-3 col-md-3 col-sm-3" >
+				Paterno
+			</div>
+
+			<div class="col-xs-3 col-md-3 col-sm-3">	
+				<input type="text" id="paternoTxt">
+			</div>
+		</div>
+		<br>
+		<div class="row">	
+				<div class="col-xs-3 col-md-3 col-sm-3" >
+				Materno
+			</div>
+
+			<div class="col-xs-3 col-md-3 col-sm-3">	
+				<input type="text" id="razonSocialTxt">
+			</div>	
+		</div>
+		<br>	
+		<div class="row">
+			<div class="col-xs-4 col-md-3 col-sm-6">
+				RFC
+			</div>
+			<div class="col-xs-4 col-md-3 col-sm-6">
+				<input type="text" id="rfcTxt" maxlength=13>
+			</div>
+		</div>
+		<br>
+		<div  id="nEmpleadosdiv"  class="row"  style="display:none">
+			<div class="col-xs-4 col-md-3 col-sm-6" >
+				N&uacute;mero de empleados 
+			</div>
+			<div class="col-xs-4 col-md-3 col-sm-6">	
+				<input type="number" id="nempleadosTxt">
+			</div>
+		</div>
+		<br>
+		<div class="row" >
+			<div class="col-xs-4 col-md-3 col-sm-6" >
+				Curriculum Vitae
+			</div>
+			<div class="col-xs-4 col-md-3 col-sm-6">	
+				<input type="file" id="cvfile">
+			</div>
+		</div>
+		<br>
+		<div class="row">
+			<div class="col-xs-4 col-md-3 col-sm-6">
+			</div>
+			<div class="col-xs-4 col-md-3 col-sm-6" >
+				<button id="registroBtn" type="button" class="btn btn-primary">Registrar</button>
+			</div>			
+		</div>	
+		<br>	
+	</form>
+	</div>
+
+<div>
+
+{% endblock %}
+{% block myscript %}
+	<script>
+	$(document).ready(function() {
+	    $("#profileImgTxt").on("change", function(){
+	    	readURL(this);
+	    });
+	});
+
+	function readURL(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            $('#profileImg').attr('src', e.target.result);
+            $('#profileImg').show();
+        }
+
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+</script>
+   {% endblock %}

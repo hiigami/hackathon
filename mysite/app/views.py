@@ -19,7 +19,7 @@ class Home(View):
         return render(request, self.template_name)
 
 class Contratar(View):
-    template_name = 'app/contratar.html'
+    template_name = 'app/contratarContador.html'
 
     def get(self, request, *args, **kwargs):
         return render(request, self.template_name)
@@ -43,3 +43,22 @@ class DashboardUser(View):
 
     def get(self, request, *args, **kwargs):
         return render(request, self.template_name)
+
+
+class Registro(View):
+    template_name = 'app/registro.html'
+
+    def get(self, request, *args, **kwargs):
+        return render(request, self.template_name)
+
+class Presupuesto(View):
+    template_name = 'app/presupuesto.html'
+
+    def get(self, request, *args, **kwargs):
+        return render(request, self.template_name)
+class Bienvenida(View):
+    template_name = 'app/bienvenida.html'
+
+    def get(self, request, *args, **kwargs):
+        return render(request, self.template_name)
+
