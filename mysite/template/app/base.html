@@ -28,17 +28,65 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js" ></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js" ></script>
         <![endif]-->
-
+        <style>
+            nav li a {
+                color:#fff;
+            }
+            nav li a:hover {
+                color:#695F58;
+            }
+            .second-wrapper {
+                height: 110px;
+                background: #E6DAD1;
+                color: #000;
+                position: relative;
+                top: -20px;
+            }
+            .second-wrapper h2 {
+                padding-top: 20px;
+                padding-left: 15%;
+            }
+            .second-wrapper nav {
+                position: absolute;
+                padding-left: 40%;
+            }
+            .second-wrapper nav a {
+                color: #000;
+            }
+            .second-wrapper nav a:hover {
+                color: #000;
+                background-color: initial;
+            }
+            footer {
+                background: #695F58;
+                position: fixed;
+                width: 100%;
+                text-align: center;
+                bottom: 0;
+            }
+            footer p {
+                font-size: smaller;
+                padding-top: 8px;
+            }
+            body {
+                background-color: #F3EDE6;
+            }
+        </style>
     </head>
 
     <body id="page-top" class="index">
 
     <!-- Navigation -->
-    <nav class="navbar navbar-inverse">
+    <nav class="navbar" style="background: #695F58;border-radius: 0;margin-bottom: 0px;">
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="" id="">
+                <ul class="nav navbar-nav navbar-left">
+                    <li class="">
+                        <img src="{% static 'img/Logo.png' %}" style="width: 67px;">
+                    </li>
+                </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li class="">
                         <a href="#page-top">Inicio</a>
@@ -61,6 +109,28 @@
 
     <!-- Header -->
     <header>
+    </header>
+    <div class="second-wrapper">
+        {% block usuario %}
+        <h2>Mis pagos</h2>
+        <nav class="navbar" style="background: initial;border-radius: 0;margin-bottom: 0px;">
+            <div>
+                <ul class="nav navbar-nav">
+                    <li class="">
+                        <a href="#page-top">Perfil</a>
+                    </li>
+                    <li class="">
+                        <a href="#portfolio">Consultar</a>
+                    </li>
+                    <li class="">
+                        <a href="#about">Notificación</a>
+                    </li>
+                </ul>
+            </div>
+      </nav>
+      {% endblock %}
+      <div style="clear:both;"></div>
+    </div>
     <div class="container">
       {% block content %}
       {% endblock %}
@@ -68,7 +138,8 @@
 
 
     <!-- Footer -->
-    <footer class="">
+    <footer>
+        <p>© 2016 Contador. Todos los derechos reservados</p>
     </footer>
      <!-- jQuery -->
     <script src="{% static 'js/jquery.js' %}" ></script>
