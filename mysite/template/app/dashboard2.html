@@ -1,5 +1,27 @@
 {% extends "app/base.html" %}
 
+{% block usuario %}
+ <h2>Mi repositorio</h2>
+ <nav class="navbar" style="background: initial;border-radius: 0;margin-bottom: 0px;">
+     <div>
+         <ul class="nav navbar-nav">
+             <li class="">
+                 <a href="#page-top">Perfil</a>
+             </li>
+             <li class="">
+                 <a href="#portfolio">Consultar</a>
+             </li>
+             <li class="">
+                 <a href="#about">Notificación</a>
+             </li>
+             <li class="">
+                 <a href="{% url 'me' %}">Repositorio</a>
+             </li>
+         </ul>
+     </div>
+<nav>
+{% endblock %}
+
 {% block mystyle %}
 {% load staticfiles %}
 <link href="{% static 'css/main.css' %}" rel="stylesheet" type="text/css">
