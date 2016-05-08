@@ -17,19 +17,19 @@
             <div>
                 <div class="col-xs-6" style="height:500px;">
                     <div style="text-align: left;margin-top:25px;padding-left:25px;">
-                        <a class="link-add-file" href="#" data-id="first">
+                        <a class="link-add-file" href="#" data-id="first" data-name="Juan Perez">
                             <i class="fa fa-folder fa-2x file-color" aria-hidden="true" style="vertical-align: middle;padding-right:20px;"></i>
                             Juan Perez
                         </a>
                         <br>
                         <br>
-                        <a class="link-add-file" href="#" data-id="second">
+                        <a class="link-add-file" href="#" data-id="second" data-name="Karerina Gutierrez">
                             <i class="fa fa-folder fa-2x file-color" aria-hidden="true" style="vertical-align: middle;padding-right:20px;"></i>
                             Karerina Gutierrez
                         </a>
                         <br>
                         <br>
-                        <a class="link-add-file" href="#" data-id="third">
+                        <a class="link-add-file" href="#" data-id="third" data-name="Natalia Paloma">
                             <i class="fa fa-folder fa-2x file-color" aria-hidden="true" style="vertical-align: middle;padding-right:20px;"></i>
                             Natalia Paloma
                         </a>
@@ -43,7 +43,9 @@
                                     <td>$ 32,435.00 MNX</td>
                                     <td>2016-05-05</td>
                                     <td>
-                                        <i class="fa fa-download" aria-hidden="true"></i>
+                                        <span role="button" class="btn-download-file">
+                                            <i class="fa fa-download" aria-hidden="true"></i>
+                                        </span>
                                     </td>
                                 </tr>
                             </tbody>
@@ -61,14 +63,18 @@
                                     <td>$ 2,035.00 MNX</td>
                                     <td>2013-02-12</td>
                                     <td>
-                                        <i class="fa fa-download" aria-hidden="true"></i>
+                                        <span role="button" class="btn-download-file">
+                                            <i class="fa fa-download" aria-hidden="true"></i>
+                                        </span>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>$ 138.40 MNX</td>
                                     <td>2013-03-12</td>
                                     <td>
-                                        <i class="fa fa-download" aria-hidden="true"></i>
+                                        <span role="button" class="btn-download-file">
+                                            <i class="fa fa-download" aria-hidden="true"></i>
+                                        </span>
                                     </td>
                                 </tr>
                             </tbody>
@@ -86,21 +92,27 @@
                                     <td>$ 40,275.00 MNX</td>
                                     <td>2016-02-12</td>
                                     <td>
-                                        <i class="fa fa-download" aria-hidden="true"></i>
+                                        <span role="button" class="btn-download-file">
+                                            <i class="fa fa-download" aria-hidden="true"></i>
+                                        </span>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>$ 50,275.00 MNX</td>
                                     <td>2016-02-13</td>
                                     <td>
-                                        <i class="fa fa-download" aria-hidden="true"></i>
+                                        <span role="button" class="btn-download-file">
+                                            <i class="fa fa-download" aria-hidden="true"></i>
+                                        </span>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>$ 1,205.00 MNX</td>
                                     <td>2016-02-14</td>
                                     <td>
-                                        <i class="fa fa-download" aria-hidden="true"></i>
+                                        <span role="button" class="btn-download-file">
+                                            <i class="fa fa-download" aria-hidden="true"></i>
+                                        </span>
                                     </td>
                                 </tr>
                             </tbody>
@@ -117,12 +129,16 @@
             </div>
         </div>
     </div>
+    <div class="factura-ejemplo" style="display:none;">
+     {{ factura }}
+    </div>
 </div>
 {% endblock %}
 
 {% block myscript %}
 <script>
     var _class_tmp = "";
+    var _name = "";
     function getRandomIntInclusive(min, max) {
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
@@ -148,7 +164,7 @@
           "-" +
           d.getDate() +
           "</td><td>" +
-          "<i class='fa fa-download' aria-hidden='true'></i>" +
+          "<span role='button' class='btn-download-file'><i class='fa fa-download' aria-hidden='true'></i></span>" +
           "</td></tr>");
     }
     $('.btn-sync').on('click', function(e){ 
@@ -171,11 +187,30 @@
         $el.removeClass('fa-folder-open');
         $el.addClass('fa-folder');
         _class_tmp = $(this).attr('data-id');
+        _name = $(this).attr('data-name');
         $(this).find("i").removeClass('fa-folder');
         $(this).find("i").addClass('fa-folder-open');
         $('.side-menu2').show();
         $('.side-menu2 table').hide();
         $('.side-menu2 table.' + $(this).attr('data-id')).show();
+    });
+    function createAndDownloadFile(_data, name) {
+        var element = document.createElement('a');
+        element.setAttribute('href', 'data:application/xml;charset=utf-8,' + encodeURI(_data));
+        element.setAttribute('download', "fileName.xml");
+        element.click();
+    }
+    $('body').on('click', '.btn-download-file', function() {
+        var $el = $(this).parent().parent();
+        var rows = $el.children();
+        var relation = [/\{sum\}/g, /\{date\}/g];
+        var _data = $('.factura-ejemplo').html();
+        _data = _data.replace("{name}", _name);
+        for(var i = rows.length - 2; i >= 0; i-- ) {
+            _data = _data.replace(relation[i], $(rows[i]).html().replace("$", "").replace("MNX", "").replace(/\s+/g, ""));
+            $(rows[i]).css("text-decoration", "line-through");
+        }
+        createAndDownloadFile(_data, "");
     });
 </script>
 {% endblock %}
