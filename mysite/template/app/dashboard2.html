@@ -9,40 +9,81 @@
 <div class="wrapper-dashboard">
     <div class="row">
         <div class="col-xs-6 col-md-4 side-menu">
-            <button class="btn btn-default side-menu-btn">Consultar</button>
+            <button class="btn btn-default side-menu-btn btn-side-menu" data-id=".col-query">Consultar</button>
             <br>
-            <button class="btn btn-default side-menu-btn btn-sync">Sync</button>
+            <button class="btn btn-default side-menu-btn btn-side-menu" data-id=".col-perfil">Perfil</button>
+            <br>
+            <button class="btn btn-default side-menu-btn btn-sync" disabled>Sync</button>
         </div>
         <div class="col-xs-12 col-sm-6 col-md-8" style="">
-            <div style="margin-top:25px;">
-                <div style="text-align: left;">
-                    <form action="/file-upload"
-                        class="dropzone"
-                        id="mydz">
-                    </form>
+            <div class="col-query" style="display:none;">
+                <div style="margin-top:25px;">
+                    <div style="text-align: left;">
+                        <form action="/file-upload"
+                            class="dropzone"
+                            id="mydz">
+                        </form>
+                    </div>
+                    <table class="table table-hover">
+                        <tbody>
+                            <tr>
+                                <td>$ 32,435.00 MNX</td>
+                                <td>2016-05-05</td>
+                                <td>factura-1217-8745-7099.xml</td>
+                                <td>
+                                    <span role="button" class="btn-del-file">
+                                        <i class="fa fa-times" aria-hidden="true"></i>
+                                    </span>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <thead>
+                            <tr>
+                                <th>Monto</th>
+                                <th>Fecha</th>
+                                <th>Documento</th>
+                                <th>Eliminar</th>
+                            </tr>
+                        </thead>
+                    </table>
                 </div>
-                <table class="table table-hover">
-                    <tbody>
-                        <tr>
-                            <td>$ 32,435.00 MNX</td>
-                            <td>2016-05-05</td>
-                            <td>factura-1217-8745-7099.xml</td>
-                            <td>
-                                <span role="button" class="btn-del-file">
-                                    <i class="fa fa-times" aria-hidden="true"></i>
-                                </span>
-                            </td>
-                        </tr>
-                    </tbody>
-                    <thead>
-                        <tr>
-                            <th>Monto</th>
-                            <th>Fecha</th>
-                            <th>Documento</th>
-                            <th>Eliminar</th>
-                        </tr>
-                    </thead>
-                </table>
+            </div>
+            <div class="col-perfil" style="display:none;">
+                <ul style="text-align: left;list-style-type: none;">
+                    <li>
+                        <span role="button" data-id="cert" class="btn-mod-profile">
+                          <i class="fa fa-square-o" aria-hidden="true"></i> <span>cert</span>
+                        </span>
+                    </li>
+                    <li>
+                        <span role="button" data-id="key" class="btn-mod-profile">
+                          <i class="fa fa-square-o" aria-hidden="true"></i> <span>key</span>
+                        </span>
+                    </li>
+                    <li>
+                        <span role="button" data-id="password" class="btn-mod-profile">
+                          <i class="fa fa-square-o" aria-hidden="true"></i> <span>password</span>
+                        </span>
+                    </li>
+                </ul>
+                <div class="profile-template" style="display:none;">
+                    <div class="cert key">
+                        <div class="profile-data inlineB">
+                            <i class="fa fa-upload" aria-hidden="true"></i>
+                            <input type="file" class="profile-file">
+                        </div>
+                    </div>
+                    <div class="password">
+                      <div class="input-group" style="width:123px;">
+                        <input type="password" class="profile-password form-control" maxlength="15">
+                        <div class="input-group-addon">
+                            <span role="button" class="btn-save-profile">
+                                <i class="fa fa-floppy-o" aria-hidden="true"></i>
+                            </span>
+                        </div>
+                      </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -53,6 +94,9 @@
 {% load staticfiles %}
 <script src="{% static 'js/dropzone.js' %}" ></script>
 <script>
+var _tmp_html_template = "";
+var count = [];
+var _type = "";
 Dropzone.options.mydz = {
     dictDefaultMessage: "Agregar archivo(s)",
     addedfile: function(file) {
@@ -109,6 +153,39 @@ $('body').on('click', '.btn-del-file', function() {
           }
           $btn.html(btnHtml);
         }, 2000);
+    });
+    
+    $('body').on('click', '.btn-side-menu', function() {
+      var $el = $($(this).attr('data-id'));
+      $el.siblings().hide();
+      $el.show();
+    });
+    $('body').on('click', '.btn-mod-profile', function() {
+        _type = $(this).attr('data-id');
+        _tmp_html_template = $(this).parent().html();
+        
+        $(this).parent().html($('.profile-template .'+_type).html());
+    });
+    $('body').on('change', '.profile-file', function() {
+        var file_name = $(this).val();
+        $(this).parent().parent().html(_tmp_html_template.replace("fa-square-o", "fa-check-square-o"));
+        if(count.lastIndexOf(_type) == -1) {
+            count.push(_type);
+        }
+        if (count.length == 3) {
+            $('.btn-sync').prop( "disabled", false );
+        } 
+    });
+    $('body').on('click', '.btn-save-profile', function() {
+        var file_name = $(this).val();
+        var $el = $(this).parent().parent();
+        $el.html(_tmp_html_template.replace("fa-square-o", "fa-check-square-o"));
+        if(count.lastIndexOf('file') == -1) {
+            count.push('file');
+        }
+        if (count.length == 3) {
+            $('.btn-sync').prop( "disabled", false );
+        }
     });
 </script>
 {% endblock %}

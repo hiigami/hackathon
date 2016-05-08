@@ -58,3 +58,36 @@ header {
 .wrapper-dashboard .row table {
     margin: 25px;
 }
+
+.inlineB {
+    display: inline-block;    
+}
+
+.profile-data {
+    width: 57px;
+    height: 15px;
+    overflow: hidden;
+    padding-right: 20px;
+    padding-bottom: 24px;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+    background-color: #536dfe;
+    border: 0;
+    outline: none!important;
+}
+
+.profile-data i {
+  padding-left: 20px;
+}
+
+.profile-data input {
+    display: block !important;
+    width: 57px !important;
+    height: 28px !important;
+    opacity: 0 !important;
+    position: relative;
+    top: -18px;
+}
+.profile-password {
+    width: 87px !important;
+    height: 28px;
+}
